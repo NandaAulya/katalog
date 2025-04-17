@@ -17,16 +17,44 @@ class AdminController extends Controller
     public function productIndex()
     {
         $products = Product::with('category')->orderBy('created_at', 'desc')->paginate(5);
-        return view('admin.listProduct', compact('products'));
+        $categories = Category::all();
+        return view('admin.listProduct', compact('products', 'categories'));
     }
 
     public function productSearch(Request $request)
     {
-        $search = $request->input('search');
+        $query = Product::query();
 
-        $products = Product::where('nama', 'like', "$search%")->paginate(5);
+        if ($request->has('search')) {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
 
-        return view('admin.listProduct', compact('products'));
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        $products = $query->with('category')->paginate(10);
+        $categories = Category::all();
+
+        return view('admin.listProduct', compact('products', 'categories'));
+    }
+
+    public function productFilter(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->has('search')) {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        $products = $query->with('category')->paginate(10);
+        $categories = Category::all(); // ini penting!
+
+        return view('admin.listProduct', compact('products', 'categories'));
     }
 
     public function productCreate()
@@ -149,7 +177,7 @@ class AdminController extends Controller
         if ($category->products()->exists()) {
             return redirect()->back()->with('error', 'Kategori tidak bisa dihapus karena masih memiliki produk.');
         }
-        
+
         $category->delete();
 
         return redirect()->route('admin.listCategory')->with('success', 'Kategori berhasil dihapus!');

@@ -35,6 +35,27 @@
         <div class="text-center">
             <h2 class="text-3xl font-bold mb-4">Selamat datang di Katalog Produk</h2>
             <p class="text-gray-600">Jelajahi produk-produk berkualitas dari UMKM kami.</p>
+            <form method="GET" action="{{ route('catalogFilter') }}" class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <input type="text" name="search" placeholder="Cari produk..." 
+                    value="{{ request('search') }}"
+                    class="px-4 py-2 w-full sm:w-auto rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            
+                <select name="category" class="px-4 py-2 w-full sm:w-auto rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Semua Kategori</option>
+                    @foreach ($categories as $cat)
+                        <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+                            {{ $cat->nama }}
+                        </option>
+                    @endforeach
+                </select>
+            
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    Cari
+                </button>
+            
+                <a href="{{ route('catalogFilter') }}" class="text-sm text-red-600 hover:underline">Reset</a>
+            </form>
+            
         </div>
 
         <!-- Produk -->

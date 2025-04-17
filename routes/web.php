@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/katalog', 'showKatalog')->name('katalog');
+    Route::get('/catalog', 'catalogFilter')->name('catalogFilter');
 });
 
 // Route::get('/katalog', function () {
@@ -34,6 +35,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::put('/admin/products/{product}', 'productUpdate')->name('admin.updateProduct');
     Route::delete('/admin/products/{product}', 'productDestroy')->name('admin.destroyProduct');
     Route::get('/admin/products/search', 'productSearch')->name('admin.searchProduct');
+    Route::get('/admin/products/filter', 'productFilter')->name('admin.productFilter');
 });
 
 // Category CRUD (bisa dimasukkan dalam grup admin)

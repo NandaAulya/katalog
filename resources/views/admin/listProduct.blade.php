@@ -17,15 +17,27 @@
     <div class="max-w-7xl mx-auto px-4 py-6">
         <!-- Tambahkan tombol di bagian ini -->
         <div class="flex justify-between items-center mb-6">
-            <form method="GET" action="{{ route('admin.searchProduct') }}" class="flex gap-2">
+            <form method="GET" action="{{ route('admin.searchProduct') }}" class="flex gap-2 items-center">
                 <input type="text" name="search" placeholder="Cari produk..."
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value="{{ request()->input('search') }}" />
+            
+                <select name="category"
+                    class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Semua Kategori</option>
+                    @foreach ($categories as $cat)
+                        <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+                            {{ $cat->nama }}
+                        </option>
+                    @endforeach
+                </select>
+            
                 <button type="submit"
                     class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
                     Cari
                 </button>
             </form>
+            
 
             <div class="flex gap-2">
                 <a href="{{ route('adminDashboard') }}"
