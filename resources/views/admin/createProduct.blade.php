@@ -3,75 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Create Product</title>
+  <title>Create Product - Admin</title>
   @vite('resources/css/app.css')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .form-card {
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    .form-card:hover {
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    .input-field {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .input-field:focus {
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    .file-upload {
+      position: relative;
+      overflow: hidden;
+    }
+    .file-upload-input {
+      position: absolute;
+      font-size: 100px;
+      opacity: 0;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+    }
+    .file-upload-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border: 2px dashed #d1d5db;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .file-upload-label:hover {
+      border-color: #3b82f6;
+      background-color: #f8fafc;
+    }
+    .preview-image {
+      max-height: 200px;
+      object-fit: contain;
+      margin-top: 1rem;
+      border-radius: 0.375rem;
+      display: none;
+    }
+    @media (max-width: 640px) {
+      .form-container {
+        padding: 1rem;
+      }
+      .form-title {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
-  <div class="bg-blue-600 py-4">
-    <h3 class="text-white text-center text-xl font-semibold">
-      Admin - Create Product
-    </h3>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-blue-600 to-blue-800 py-4 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <h3 class="text-white text-xl font-semibold flex items-center gap-2">
+        <i class="fas fa-cube"></i>
+        <span>Create New Product</span>
+      </h3>
+    </div>
   </div>
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
-    <div class="flex justify-end mb-4">
-      <a href="{{ route('admin.listProduct') }}" class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Back
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto px-4 py-8 form-container">
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mb-6">
+      <a href="{{ route('admin.listProduct') }}" class="flex items-center gap-2 text-blue-600 hover:text-blue-800">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Products</span>
       </a>
     </div>
 
-    <div class="bg-white shadow-lg rounded-lg">
-      <div class="bg-blue-600 px-6 py-4 rounded-t-lg">
-        <h3 class="text-white text-lg font-semibold">Create Product</h3>
+    <!-- Form Card -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden form-card">
+      <!-- Card Header -->
+      <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
+        <h3 class="text-white text-xl font-semibold flex items-center gap-3">
+          <i class="fas fa-plus-circle"></i>
+          <span>Add New Product</span>
+        </h3>
       </div>
 
-      <form enctype="multipart/form-data" action="{{ route('admin.storeProduct') }}" method="post" class="p-6">
+      <!-- Form -->
+      <form enctype="multipart/form-data" action="{{ route('admin.storeProduct') }}" method="post" class="p-6 space-y-6">
         @csrf
 
         <!-- Name -->
-        <div class="mb-4">
-          <label class="block text-lg font-medium mb-1">Name</label>
-          <input type="text" name="nama" placeholder="Name"
+        <div class="space-y-2">
+          <label class="block text-lg font-medium text-gray-700 flex items-center gap-2">
+            <i class="fas fa-tag text-blue-500"></i>
+            <span>Product Name</span>
+          </label>
+          <input type="text" name="nama" placeholder="Enter product name"
             value="{{ old('nama') }}"
-            class="w-full px-4 py-2 rounded border @error('nama') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="w-full px-4 py-3 rounded-lg border input-field @error('nama') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           @error('nama')
-          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+          <p class="text-red-500 text-sm mt-1 flex items-center gap-1">
+            <i class="fas fa-exclamation-circle"></i>
+            {{ $message }}
+          </p>
           @enderror
         </div>
 
-        <!-- Price -->
-        <div class="mb-4">
-          <label class="block text-lg font-medium mb-1">Price</label>
-          <input type="text" name="harga" placeholder="harga"
-            value="{{ old('harga') }}"
-            class="w-full px-4 py-2 rounded border @error('harga') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          @error('harga')
-          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-          @enderror
-        </div>
+        <!-- Price and Stock (Row on larger screens) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Price -->
+          <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700 flex items-center gap-2">
+              <i class="fas fa-tag text-blue-500"></i>
+              <span>Price</span>
+            </label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
+              <input type="text" name="harga" placeholder="0"
+                value="{{ old('harga') }}"
+                class="w-full pl-10 pr-4 py-3 rounded-lg border input-field @error('harga') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            @error('harga')
+            <p class="text-red-500 text-sm mt-1 flex items-center gap-1">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ $message }}
+            </p>
+            @enderror
+          </div>
 
-        <!-- Stock -->
-        <div class="mb-4">
-          <label class="block text-lg font-medium mb-1">Stock</label>
-          <input type="number" name="stok" placeholder="stok"
-            value="{{ old('stok') }}"
-            class="w-full px-4 py-2 rounded border @error('stok') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          @error('stok')
-          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-          @enderror
+          <!-- Stock -->
+          <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700 flex items-center gap-2">
+              <i class="fas fa-boxes text-blue-500"></i>
+              <span>Stock</span>
+            </label>
+            <input type="number" name="stok" placeholder="Enter stock quantity"
+              value="{{ old('stok') }}"
+              class="w-full px-4 py-3 rounded-lg border input-field @error('stok') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            @error('stok')
+            <p class="text-red-500 text-sm mt-1 flex items-center gap-1">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ $message }}
+            </p>
+            @enderror
+          </div>
         </div>
 
         <!-- Category -->
-        <div class="mb-4">
-          <label class="block text-lg font-medium mb-1">Category</label>
-          <select name="category_id" class="w-full px-4 py-2 rounded border @error('category_id') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="">-- Choose Category --</option>
+        <div class="space-y-2">
+          <label class="block text-lg font-medium text-gray-700 flex items-center gap-2">
+            <i class="fas fa-tags text-blue-500"></i>
+            <span>Category</span>
+          </label>
+          <select name="category_id" class="w-full px-4 py-3 rounded-lg border input-field @error('category_id') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">-- Select Category --</option>
             @foreach ($categories as $category)
               <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                 {{ $category->nama }}
@@ -79,38 +173,80 @@
             @endforeach
           </select>
           @error('category_id')
-          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+          <p class="text-red-500 text-sm mt-1 flex items-center gap-1">
+            <i class="fas fa-exclamation-circle"></i>
+            {{ $message }}
+          </p>
           @enderror
         </div>
 
         <!-- Description -->
-        <div class="mb-4">
-          <label class="block text-lg font-medium mb-1">Description</label>
-          <textarea name="deskripsi" placeholder="deskripsi"
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        <div class="space-y-2">
+          <label class="block text-lg font-medium text-gray-700 flex items-center gap-2">
+            <i class="fas fa-align-left text-blue-500"></i>
+            <span>Description</span>
+          </label>
+          <textarea name="deskripsi" placeholder="Enter product description"
+            class="w-full px-4 py-3 rounded-lg border input-field border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows="5">{{ old('deskripsi') }}</textarea>
         </div>
 
-        <!-- Image -->
-        <div class="mb-4">
-          <label class="block text-lg font-medium mb-1">Image</label>
-          <input type="file" name="gambar"
-            class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <!-- Image Upload -->
+        <div class="space-y-2">
+          <label class="block text-lg font-medium text-gray-700 flex items-center gap-2">
+            <i class="fas fa-image text-blue-500"></i>
+            <span>Product Image</span>
+          </label>
+          <div class="file-upload">
+            <input type="file" name="gambar" id="gambar" class="file-upload-input" onchange="previewImage(this)">
+            <label for="gambar" class="file-upload-label flex flex-col items-center">
+              <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+              <span class="text-gray-600">Click to upload product image</span>
+              <span class="text-sm text-gray-400">(JPEG, PNG, max 2MB)</span>
+            </label>
+            <img id="image-preview" class="preview-image" alt="Preview">
+          </div>
         </div>
 
-        <!-- Submit -->
-        <div>
-          <button type="submit"
-            class="w-full flex items-center justify-center gap-2 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition text-lg font-medium">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            Submit
+        <!-- Submit Button -->
+        <div class="pt-4">
+          <button type="submit" class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-lg hover:from-blue-700 hover:to-blue-800 transition text-lg font-medium shadow-md">
+            <i class="fas fa-save"></i>
+            <span>Save Product</span>
           </button>
         </div>
       </form>
     </div>
   </div>
+
+  <script>
+    function previewImage(input) {
+      const preview = document.getElementById('image-preview');
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = function() {
+        preview.src = reader.result;
+        preview.style.display = 'block';
+      }
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = '';
+        preview.style.display = 'none';
+      }
+    }
+
+    // Format price input
+    document.querySelector('input[name="harga"]').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      e.target.value = formatNumber(value);
+    });
+
+    function formatNumber(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+  </script>
 </body>
 </html>

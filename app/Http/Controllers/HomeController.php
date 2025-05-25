@@ -10,10 +10,12 @@ class HomeController extends Controller
 {
     public function showKatalog()
     {
-        $products = Product::with('category')->latest()->get();
+        $products = Product::with('category')->latest()->paginate(10);
         $categories = Category::all();
         return view('katalog', compact('products', 'categories'));
     }
+
+    
 
     public function catalogFilter(Request $request)
     {
@@ -27,9 +29,15 @@ class HomeController extends Controller
             $query->where('category_id', $request->category);
         }
 
-        $products = $query->orderBy('created_at', 'desc')->get();
+        $products = $query->orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::all();
 
         return view('katalog', compact('products', 'categories'));
+    }
+
+    public function dashboard()
+    {
+        $highlightProducts = Product::orderBy('harga', 'desc')->take(5)->get();
+        return view('index', compact('highlightProducts'));
     }
 }
