@@ -5,9 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/katalog', 'showKatalog')->name('katalog');

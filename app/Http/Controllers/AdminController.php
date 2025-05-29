@@ -7,12 +7,25 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('adminDashboard');
+        $totalProduk = Product::count();
+        $totalKategori = Category::count();
+
+        // Hitung penambahan bulan ini
+        $produkBulanIni = Product::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->count();
+
+        $kategoriBulanIni = Category::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->count();
+
+        return view('adminDashboard', compact('totalProduk', 'totalKategori', 'produkBulanIni', 'kategoriBulanIni'));
     }
     public function productIndex()
     {
