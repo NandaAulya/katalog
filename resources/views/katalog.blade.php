@@ -49,7 +49,7 @@
     <!-- Navbar -->
     <nav class="bg-blue-600 p-4 shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-white text-xl font-semibold">UMKM Helm</h1>
+            <h1 class="text-white text-xl font-semibold">Toko Agus Jaya</h1>
             <div class="flex gap-4 items-center">
                 <a href="{{ route('dashboard') }}" class="text-white hover:underline">Dashboard</a>
                 <a href="{{ route('katalog') }}" class="text-white font-semibold underline">Katalog</a>

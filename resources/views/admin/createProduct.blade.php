@@ -239,14 +239,14 @@
     }
 
     // Format price input
-    document.querySelector('input[name="harga"]').addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\D/g, '');
-      e.target.value = formatNumber(value);
-    });
+    // document.querySelector('input[name="harga"]').addEventListener('input', function(e) {
+    //   let value = e.target.value.replace(/\D/g, '');
+    //   e.target.value = formatNumber(value);
+    // });
 
-    function formatNumber(number) {
-      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
+    // function formatNumber(number) {
+    //   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    // }
   </script>
 </body>
 </html>
