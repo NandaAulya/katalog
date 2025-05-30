@@ -32,23 +32,37 @@
 
         <form method="POST" action="{{ route('register') }}" class="space-y-4">
             @csrf
+
             <div>
                 <label class="block text-sm text-gray-700 font-medium">Nama Lengkap</label>
-                <input type="text" name="name" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Nama Anda">
+                <input type="text" name="name" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                       placeholder="Nama Anda">
             </div>
+
             <div>
-                <label class="block text-sm text-gray-700 font-medium">Email</label>
-                <input type="email" name="email" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="you@example.com">
+                <label class="block text-sm text-gray-700 font-medium">Username</label>
+                <input type="text" name="username" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                       placeholder="Username unik Anda">
             </div>
+
             <div>
                 <label class="block text-sm text-gray-700 font-medium">Password</label>
-                <input type="password" name="password" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="••••••••">
+                <input type="password" name="password" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                       placeholder="••••••••">
             </div>
+
             <div>
                 <label class="block text-sm text-gray-700 font-medium">Konfirmasi Password</label>
-                <input type="password" name="password_confirmation" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="••••••••">
+                <input type="password" name="password_confirmation" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                       placeholder="••••••••">
             </div>
-            <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
+
+            <button type="submit"
+                    class="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
                 Daftar Sekarang
             </button>
         </form>

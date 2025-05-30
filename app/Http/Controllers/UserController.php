@@ -20,27 +20,27 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(Auth::user()->role === 'admin' ? '/admin' : route('home'));
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+        return back()->withErrors(['username' => 'Username atau password salah.']);
     }
 
     public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
+            'username' => 'required|string|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => bcrypt($request->password),
             'role' => 'client', // default role
         ]);

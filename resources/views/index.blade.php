@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - UMKM Helm</title>
+    <title>Dashboard - Toko Agus Jaya</title>
     @vite('resources/css/app.css')
     <!-- Slick Carousel CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -42,10 +42,10 @@
 
 <body class="bg-gray-100 text-gray-800">
 
-<!-- Navbar -->
+    <!-- Navbar -->
     <nav class="bg-blue-600 p-4 shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-white text-xl font-semibold">UMKM Helm</h1>
+            <h1 class="text-white text-xl font-semibold">Toko Agus Jaya</h1>
             <div class="flex gap-4 items-center">
                 <a href="{{ route('dashboard') }}" class="text-white font-semibold underline">Dashboard</a>
                 <a href="{{ route('katalog') }}" class="text-white hover:underline">Katalog</a>
@@ -67,13 +67,11 @@
 
     <!-- Content -->
     <main class="max-w-7xl mx-auto px-4 py-10">
-        <!-- Carousel Promo Utama -->
         <div class="mb-16">
             <div class="promo-slider">
                 <!-- Slide 1 -->
                 <div class="promo-slide relative">
-                    <img src="https://images.unsplash.com/photo-1580261450046-d0a30080dc9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                        alt="Promo Helm 1">
+                    <img src="images/image1.jpg" alt="Promo Helm 1">
                     <div
                         class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 rounded-b-lg">
                         <div class="max-w-md">
@@ -88,8 +86,7 @@
 
                 <!-- Slide 2 -->
                 <div class="promo-slide relative">
-                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                        alt="Promo Helm 2">
+                    <img src="images/image2.jpg" alt="Promo Helm 2">
                     <div
                         class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 rounded-b-lg">
                         <div class="max-w-md">
@@ -105,8 +102,7 @@
 
                 <!-- Slide 3 -->
                 <div class="promo-slide relative">
-                    <img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                        alt="Promo Helm 3">
+                    <img src="images/image3.jpeg" alt="Promo Helm 3">
                     <div
                         class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 rounded-b-lg">
                         <div class="max-w-md">
@@ -120,6 +116,7 @@
                 </div>
             </div>
         </div>
+
 
         <!-- Promo Section -->
         <div class="bg-blue-50 rounded-xl p-8 mb-12">

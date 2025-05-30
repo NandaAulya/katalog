@@ -29,16 +29,21 @@
         <form method="POST" action="{{ route('login') }}" class="space-y-4">
             @csrf
             <div>
-                <label class="block text-sm text-gray-700 font-medium">Email</label>
-                <input type="email" name="email" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="you@example.com">
+                <label class="block text-sm text-gray-700 font-medium">Username</label>
+                <input type="text" name="username" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                       placeholder="Masukkan username Anda">
             </div>
 
             <div>
                 <label class="block text-sm text-gray-700 font-medium">Password</label>
-                <input type="password" name="password" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="••••••••">
+                <input type="password" name="password" required
+                       class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                       placeholder="••••••••">
             </div>
 
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+            <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
                 Masuk
             </button>
         </form>
