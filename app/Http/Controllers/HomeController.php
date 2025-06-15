@@ -40,4 +40,10 @@ class HomeController extends Controller
         $highlightProducts = Product::orderBy('harga', 'desc')->take(5)->get();
         return view('index', compact('highlightProducts'));
     }
+
+    public function show($id)
+    {
+        $product = Product::with('category')->findOrFail($id);
+        return view('detailProduk', compact('product'));
+    }
 }
