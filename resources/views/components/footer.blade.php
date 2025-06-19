@@ -67,7 +67,7 @@
                     </h3>
                     <ul class="space-y-3 text-gray-400">
                         <li>
-                            <a href="#" class="footer-link flex items-center gap-2">
+                            <a href="katalog" class="footer-link flex items-center gap-2 hover:text-blue-400">
                                 <i class="fas fa-chevron-right text-xs text-blue-400"></i>
                                 <span>Penjualan Helm</span>
                             </a>
@@ -76,12 +76,6 @@
                             <a href="#" class="footer-link flex items-center gap-2">
                                 <i class="fas fa-chevron-right text-xs text-blue-400"></i>
                                 <span>Perawatan Helm</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer-link flex items-center gap-2">
-                                <i class="fas fa-chevron-right text-xs text-blue-400"></i>
-                                <span>Custom Design Helm</span>
                             </a>
                         </li>
                         <li>
@@ -109,8 +103,12 @@
                         <li class="flex items-start">
                             <i class="fas fa-phone-alt text-blue-400 mt-1 mr-3 text-sm"></i>
                             <div>
-                                <div class="font-medium">Customer Service</div>
-                                <div>(021) 1234-5678</div>
+                                <div class="font-medium">Agus</div>
+                                <div><a href="https://wa.me/6281803185594" target="_blank"
+                                        class="text-blue-400 hover:underline">0818-0318-5594</a></div>
+                                <div class="font-medium">Galino</div>
+                                <div><a href="https://wa.me/628155599007341" target="_blank"
+                                        class="text-blue-400 hover:underline">0815-5990-07341</a></div>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -124,7 +122,11 @@
                             <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3 text-sm"></i>
                             <div>
                                 <div class="font-medium">Alamat</div>
-                                <div>Jl. Raya Keselamatan No. 123<br>Jakarta Selatan, 12345</div>
+                                <div>Jl. Raya Manyar No.68, Menur Pumpungan, Sukolilo, Surabaya, Jawa Timur 60118</div>
+                                <a href="/maps" target="_blank"
+                                    class="text-blue-400 hover:underline hover:text-blue-500 text-sm">
+                                    <i class="fas fa-location-arrow mr-2"></i> Lihat Lokasi di Google Maps
+                                </a>
                             </div>
                         </li>
                     </ul>
@@ -133,12 +135,9 @@
 
             <div class="border-t border-gray-800 pt-6 text-center">
                 <div class="mb-2 text-sm text-gray-500">
-                    &copy; {{ date('Y') }} UMKM Helm. All rights reserved. |
+                    &copy; {{ date('Y') }} Toko Agus Jaya Helm. All rights reserved. |
                     <a href="#" class="hover:text-blue-400">Kebijakan Privasi</a> |
                     <a href="#" class="hover:text-blue-400">Syarat & Ketentuan</a>
-                </div>
-                <div class="text-xs text-gray-600">
-                    Made with <i class="fas fa-heart text-red-400"></i> in Jakarta
                 </div>
             </div>
         </div>

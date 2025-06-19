@@ -76,7 +76,7 @@
                         class="btn-explore bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                         <i class="fas fa-helmet-safety mr-2"></i> Jelajahi Produk
                     </a>
-                    <a href="#"
+                    <a href="https://wa.me/6281803185594"
                         class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:-translate-y-1">
                         <i class="fas fa-phone-alt mr-2"></i> Hubungi Kami
                     </a>
@@ -99,8 +99,8 @@
                             value="{{ request('search') }}"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm transition duration-300">
                         <button type="submit"
-                            class="absolute right-3 top-3 text-gray-400 hover:text-blue-600 transition duration-300">
-                            <i class="fas fa-search"></i>
+                            class="absolute right-1 top-1 text-white px-4 py-2 font-medium bg-blue-500 rounded-lg hover:bg-blue-700 transition duration-300">
+                            <i class="fas fa-search mr-2"></i> Cari
                         </button>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                     </button>
                     <a href="{{ route('katalog') }}"
                         class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-3 rounded-lg font-medium flex items-center transition duration-300">
-                        <i class="fas fa-sync-alt"></i>
+                        <i class="fas fa-sync-alt mr-2"></i> reset
                     </a>
                 </div>
             </form>
@@ -140,61 +140,60 @@
                     </div>
                     <span>Daftar Produk</span>
                 </h2>
-                
-                @if($products->count() > 0)
-                <div class="text-sm text-gray-500">
-                    Menampilkan {{ $products->firstItem() }} - {{ $products->lastItem() }} dari {{ $products->total() }} produk
-                </div>
+
+                @if ($products->count() > 0)
+                    <div class="text-sm text-gray-500">
+                        Menampilkan {{ $products->firstItem() }} - {{ $products->lastItem() }} dari
+                        {{ $products->total() }} produk
+                    </div>
                 @endif
             </div>
 
             @if ($products->count() > 0)
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div
+                    class="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                     @foreach ($products as $product)
-                        <div class="group relative bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-md">
-                            <div class="relative">
-                                @if ($product->gambar)
-                                    <img src="{{ asset('uploads/products/' . $product->gambar) }}"
-                                        alt="{{ $product->nama }}" 
-                                        class="w-full h-56 object-contain p-5 bg-gray-50"
+                        <a href="{{ route('productDetail', $product->id) }}"
+                            class="group relative bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-md block">
+                            <div class="relative w-full h-56 bg-gray-50 rounded-xl overflow-hidden">
+                                @if ($product->thumbnail)
+                                    <img src="{{ asset('uploads/products/' . $product->thumbnail->image) }}"
+                                        alt="{{ $product->nama }}" class="w-full h-full object-contain p-4"
                                         onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
                                 @else
-                                    <div class="w-full h-56 flex items-center justify-center bg-gray-100 text-gray-400">
+                                    <div class="w-full h-full flex items-center justify-center text-gray-400">
                                         <i class="fas fa-helmet-safety text-5xl opacity-30"></i>
                                     </div>
                                 @endif
+
                                 @if ($product->is_new)
-                                    <span class="absolute top-3 right-3 bg-amber-500 text-white font-bold px-3 py-1 rounded-full text-xs">
+                                    <span
+                                        class="absolute top-3 right-3 bg-amber-500 text-white font-bold px-3 py-1 rounded-full text-xs shadow">
                                         <i class="fas fa-certificate mr-1"></i> BARU
                                     </span>
                                 @endif
                             </div>
+
                             <div class="p-5">
-                                <div class="flex justify-between items-start mb-3">
-                                    <h3 class="font-bold text-lg truncate" title="{{ $product->nama }}">{{ $product->nama }}</h3>
-                                </div>
-                                
-                                <div class="flex justify-between items-center mb-4">
-                                    <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">
-                                        <i class="fas fa-tag mr-1 text-xs"></i> {{ $product->category->nama ?? 'Uncategorized' }}
-                                    </span>
-                                    <span class="text-sm text-gray-500">
-                                        <i class="fas fa-box-open mr-1"></i> {{ $product->stok }}
-                                    </span>
-                                </div>
-                                
+                                <h3 class="font-bold text-lg truncate mb-2 group-hover:text-blue-600" title="{{ $product->nama }}">
+                                    {{ $product->nama }}
+                                </h3>
                                 <div class="flex justify-between items-center">
-                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">
-                                        <i class="fas fa-tag mr-1"></i> Rp {{ number_format($product->harga, 0, ',', '.') }}
+                                    <p class="text-blue-600 font-semibold text-xl">
+                                        Rp{{ number_format($product->harga, 0, ',', '.') }}
+                                    </p>
+                                </div>
+                                <div class="mt-3">
+                                    <span
+                                        class="inline-block text-center w-full bg-blue-600 text-white py-2 rounded-lg text-sm hover:bg-blue-700 transition">
+                                        Lihat Detail →
                                     </span>
-                                    <a href="{{ route('productDetail', $product->id) }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
-                                        Detail <i class="fas fa-chevron-right ml-1 text-xs"></i>
-                                    </a>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
+
 
                 <!-- Pagination -->
                 <div class="mt-8 flex justify-center">
@@ -202,11 +201,13 @@
                 </div>
             @else
                 <div class="animate-[fadeIn_0.6s_ease-out] bg-white rounded-xl shadow-md p-8 text-center">
-                    <div class="mx-auto w-24 h-24 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
+                    <div
+                        class="mx-auto w-24 h-24 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
                         <i class="fas fa-search fa-2x"></i>
                     </div>
                     <h3 class="text-xl font-medium text-gray-700 mb-2">Produk tidak ditemukan</h3>
-                    <p class="text-gray-500 mb-6 max-w-md mx-auto">Maaf, kami tidak dapat menemukan produk yang sesuai dengan pencarian Anda.</p>
+                    <p class="text-gray-500 mb-6 max-w-md mx-auto">Maaf, kami tidak dapat menemukan produk yang sesuai
+                        dengan pencarian Anda.</p>
                     <a href="{{ route('katalog') }}"
                         class="inline-block transition-all duration-300 relative overflow-hidden bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium hover:-translate-y-0.5 hover:shadow-lg">
                         <i class="fas fa-sync-alt mr-2"></i> Reset Pencarian
@@ -214,24 +215,6 @@
                 </div>
             @endif
         </div>
-
-        <!-- Promo Banner -->
-        {{-- <div class="bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl shadow-xl overflow-hidden relative mb-16 animate-fade-in" id="promo-banner">
-            <div class="absolute -top-16 -right-16 w-48 h-48 bg-white/10 rounded-full animate-float"></div>
-            <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/10 rounded-full animate-float" style="animation-delay: 1.5s;"></div>
-            
-            <div class="relative z-10 p-8 md:p-10">
-                <div class="flex flex-col md:flex-row items-center justify-between">
-                    <div class="mb-6 md:mb-0 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-white mb-2">Diskon Spesial 20%!</h3>
-                        <p class="text-white/90 max-w-md">Untuk pembelian helm minimal 2 buah. Berlaku hingga 30 Juni 2023. Ayo manfaatkan promo ini sekarang!</p>
-                    </div>
-                    <button class="bg-white text-amber-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-all duration-300 hover:shadow-lg transform hover:scale-105">
-                        <i class="fas fa-gift mr-2"></i> Klaim Promo Sekarang
-                    </button>
-                </div>
-            </div>
-        </div> --}}
     </main>
 
     <!-- Footer -->

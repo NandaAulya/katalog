@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
@@ -83,7 +84,7 @@ class AdminController extends Controller
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
-            'gambar' => 'nullable|image|max:2048',
+            'gambar.*' => 'nullable|image|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -96,12 +97,17 @@ class AdminController extends Controller
         $product->fill($request->only(['nama', 'harga', 'stok', 'category_id', 'deskripsi']));
         $product->save();
 
+        // Upload multiple images
         if ($request->hasFile('gambar')) {
-            $gambar = $request->gambar;
-            $imageName = time() . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move(public_path('uploads/products'), $imageName);
-            $product->gambar = $imageName;
-            $product->save();
+            foreach ($request->file('gambar') as $gambar) {
+                $imageName = time() . '-' . uniqid() . '.' . $gambar->getClientOriginalExtension();
+                $gambar->move(public_path('uploads/products'), $imageName);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => $imageName,
+                ]);
+            }
         }
 
         return redirect()->route('admin.listProduct')->with('success', 'Produk berhasil ditambahkan!');
@@ -123,7 +129,7 @@ class AdminController extends Controller
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
-            'gambar' => 'nullable|image|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // fix nama field
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -132,21 +138,23 @@ class AdminController extends Controller
             return redirect()->route('admin.editProduct', $product->id)->withInput()->withErrors($validator);
         }
 
-        $product->fill($request->only(['nama', 'harga', 'stok', 'category_id', 'deskripsi']));
-        $product->save();
+        $product->update($request->only(['nama', 'harga', 'stok', 'category_id', 'deskripsi']));
 
-        if ($request->hasFile('gambar')) {
-            File::delete(public_path('uploads/products/' . $product->image_url));
+        // Upload gambar baru jika ada
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $img) {
+                $imageName = time() . '_' . uniqid() . '.' . $img->getClientOriginalExtension();
+                $img->move(public_path('uploads/products'), $imageName);
 
-            $gambar = $request->gambar;
-            $imageName = time() . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move(public_path('uploads/products'), $imageName);
-
-            $product->gambar = $imageName;
-            $product->save();
+                // Simpan ke tabel product_images
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => $imageName,
+                ]);
+            }
         }
 
-        return redirect()->route('admin.listProduct')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('admin.listProduct', $product->id)->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function categoryIndex()
@@ -172,11 +180,49 @@ class AdminController extends Controller
 
         return redirect()->route('admin.listCategory')->with('success', 'Kategori berhasil ditambahkan!');
     }
+    public function deleteImage($id)
+    {
+        $image = ProductImage::findOrFail($id);
+
+        $imagePath = public_path('uploads/products/' . $image->image);
+
+        // Cek apakah file benar-benar ada sebelum dihapus
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+
+        // Hapus data dari database
+        $image->delete();
+
+        return back()->with('success', 'Gambar berhasil dihapus!');
+    }
 
     public function productDestroy($id)
     {
         $product = Product::findOrFail($id);
-        File::delete(public_path('uploads/products/' . $product->image_url));
+
+        // Hapus thumbnail jika ada
+        if ($product->thumbnail && $product->thumbnail->image) {
+            $thumbnailPath = public_path('uploads/products/' . $product->thumbnail->image);
+            if (File::exists($thumbnailPath)) {
+                File::delete($thumbnailPath);
+            }
+
+            // Hapus relasi thumbnail dari DB jika perlu
+            $product->thumbnail->delete();
+        }
+
+        // Hapus semua gambar tambahan
+        foreach ($product->images as $image) {
+            $imagePath = public_path('uploads/products/' . $image->image);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+
+            $image->delete();
+        }
+
+        // Hapus produk dari DB
         $product->delete();
 
         return redirect()->route('admin.listProduct')->with('success', 'Produk berhasil dihapus!');

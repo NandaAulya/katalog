@@ -14,6 +14,10 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/products/{id}', 'show')->name('productDetail');
 });
 
+Route::get('/maps', function () {
+    return view('maps');
+});
+
 // Route::get('/katalog', function () {
 //     return view('katalog');
 // });
@@ -36,6 +40,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::delete('/admin/products/{product}', 'productDestroy')->name('admin.destroyProduct');
     Route::get('/admin/products/search', 'productSearch')->name('admin.searchProduct');
     Route::get('/admin/products/filter', 'productFilter')->name('admin.productFilter');
+    Route::delete('/admin/delete-image/{id}', 'deleteImage')->name('admin.deleteImage');
 });
 
 

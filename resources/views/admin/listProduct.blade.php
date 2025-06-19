@@ -189,13 +189,13 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                         {{ $product->id }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        @if ($product->gambar)
-                                            <img src="{{ asset('uploads/products/' . $product->gambar) }}"
-                                                alt="Product Image" class="product-image">
+                                        @if ($product->thumbnail)
+                                            <img src="{{ asset('uploads/products/' . $product->thumbnail->image) }}"
+                                                alt="{{ $product->nama }}" class="product-image"
+                                                onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
                                         @else
-                                            <div
-                                                class="product-image bg-gray-100 flex items-center justify-center text-gray-400">
-                                                <i class="fas fa-image"></i>
+                                            <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                                <i class="fas fa-helmet-safety text-5xl opacity-30"></i>
                                             </div>
                                         @endif
                                     </td>

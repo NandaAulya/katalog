@@ -1,168 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ $product->nama }} | UMKM Agus Jaya</title>
-    @vite('resources/css/app.css', 'resources/js/detailProducts.js')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    @vite(['resources/css/app.css', 'resources/js/detailProducts.js'])
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <style>
-        .product-image-container {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
-        }
-        
-        .price-tag {
-            background: linear-gradient(to right, #3b82f6, #2563eb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .whatsapp-btn {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(25, 175, 80, 0.3);
-            background: linear-gradient(to right, #25D366, #128C7E);
-        }
-        
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(25, 175, 80, 0.4);
-        }
-        
-        .back-btn {
-            transition: all 0.2s ease;
-        }
-        
-        .back-btn:hover {
-            transform: translateX(-3px);
-        }
-        
-        .stock-badge {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stock-badge::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .stock-badge:hover::after {
-            transform: translateX(0);
-        }
-        
-        @media (min-width: 768px) {
-            .product-container {
-                max-width: 800px;
-            }
-            
-            .product-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+        .swiper-slide img {
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800 min-h-screen">
-    <!-- Navbar (optional) -->
+
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen">
     <x-navbar />
-    
-    <div class="container mx-auto px-4 py-8">
-        <div class="product-container mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-            <!-- Product Grid -->
-            <div class="product-grid">
-                <!-- Gambar Produk -->
-                <div class="product-image-container h-full min-h-96 flex items-center justify-center p-8 relative">
-                    @if($product->gambar)
-                        <img src="{{ asset('uploads/products/' . $product->gambar) }}" 
-                             alt="{{ $product->nama }}"
-                             class="h-full max-h-80 w-auto object-contain transition duration-500 hover:scale-105"
-                             onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
-                    @else
-                        <div class="text-center text-gray-400">
-                            <i class="fas fa-helmet-safety text-6xl opacity-30"></i>
-                            <p class="mt-4 text-sm font-medium">Gambar tidak tersedia</p>
-                        </div>
-                    @endif
-                    
-                    <!-- Badge untuk produk baru -->
-                    @if($product->is_new)
-                    <div class="absolute top-4 right-4 bg-amber-500 text-white font-bold px-3 py-1 rounded-full text-xs flex items-center animate-pulse">
-                        <i class="fas fa-certificate mr-1"></i> BARU
+
+    <main class="container mx-auto px-4 py-10 space-y-12">
+
+        <!-- Detail Produk -->
+        <section class="bg-white rounded-3xl shadow-xl p-6 md:p-10 md:flex gap-8">
+            <!-- Gambar -->
+            <div class="md:w-1/2">
+                <div class="swiper">
+                    <div class="swiper-wrapper content-center">
+                        @forelse ($product->images as $image)
+                            <div class="swiper-slide flex justify-center items-center">
+                                <img src="{{ asset('uploads/products/' . $image->image) }}" alt="{{ $product->nama }}"
+                                    class="w-full max-w-xs md:max-w-md max-h-80 object-contain mx-auto" />
+
+                            </div>
+                        @empty
+                            <div class="swiper-slide flex flex-col items-center justify-center text-gray-400">
+                                <i class="fas fa-image text-6xl"></i>
+                                <p class="mt-2">Gambar tidak tersedia</p>
+                            </div>
+                        @endforelse
                     </div>
-                    @endif
+
+                    <!-- Navigasi Swiper -->
+                    <div class="swiper-pagination mt-4"></div>
+                    <div class="swiper-button-next text-blue-500"></div>
+                    <div class="swiper-button-prev text-blue-500"></div>
                 </div>
-                
-                <!-- Detail Produk -->
-                <div class="p-8 flex flex-col">
-                    <!-- Nama Produk -->
-                    <h1 class="text-2xl md:text-3xl font-bold mb-3 text-gray-900">{{ $product->nama }}</h1>
-                    
-                    <!-- Kategori -->
-                    <div class="mb-4">
-                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                            <i class="fas fa-tag mr-1"></i> {{ $product->category->nama ?? 'Uncategorized' }}
-                        </span>
+            </div>
+
+            <!-- Informasi Produk -->
+            <div class="md:w-1/2 mt-8 md:mt-0 flex flex-col justify-between">
+                <div>
+                    <span
+                        class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full uppercase font-semibold tracking-wide mb-4">
+                        {{ $product->category->nama ?? 'Uncategorized' }}
+                    </span>
+
+                    <h1 class="text-4xl font-extrabold mb-3">{{ $product->nama }}</h1>
+                    <div class="text-2xl font-bold text-blue-600 mb-4">
+                        Rp{{ number_format($product->harga, 0, ',', '.') }}
                     </div>
-                    
-                    <!-- Rating (jika ada) -->
-                    @if($product->rating)
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-amber-400 mr-2">
-                            @for($i = 1; $i <= 5; $i++)
-                                @if($i <= floor($product->rating))
-                                    <i class="fas fa-star"></i>
-                                @elseif($i - 0.5 <= $product->rating)
-                                    <i class="fas fa-star-half-alt"></i>
-                                @else
-                                    <i class="far fa-star"></i>
-                                @endif
-                            @endfor
-                        </div>
-                        <span class="text-sm text-gray-500">({{ $product->review_count ?? 0 }} ulasan)</span>
+
+                    <div class="mb-6 text-lg">
+                        @if ($product->stok > 0)
+                            <span class="flex items-center text-green-600 font-medium">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                Stok tersedia: {{ $product->stok }} unit
+                            </span>
+                        @else
+                            <span class="flex items-center text-red-600 font-medium">
+                                <i class="fas fa-times-circle mr-2"></i>
+                                Stok habis
+                            </span>
+                        @endif
                     </div>
-                    @endif
-                    
-                    <!-- Harga dan Stok -->
-                    <div class="flex items-center justify-between mb-6">
-                        <span class="text-3xl font-extrabold price-tag">
-                            Rp {{ number_format($product->harga, 0, ',', '.') }}
-                        </span>
-                        <span class="stock-badge bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
-                            <i class="fas fa-box-open mr-1"></i> Stok: {{ $product->stok }}
-                        </span>
-                    </div>
-                    
-                    <!-- Deskripsi -->
-                    <div class="mb-8 flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3 border-b pb-2">Deskripsi Produk</h3>
-                        <p class="text-gray-600 leading-relaxed">{{ $product->deskripsi ?? 'Tidak ada deskripsi tersedia' }}</p>
-                    </div>
-                    
-                    <!-- Tombol WhatsApp -->
-                    <div class="mt-auto">
-                        <a href="https://wa.me/6281234567890?text=Saya%20tertarik%20dengan%20produk%20{{ urlencode($product->nama) }}%20(%20Rp%20{{ number_format($product->harga, 0, ',', '.') }})%20di%20UMKM%20Agus%20Jaya"
-                           class="whatsapp-btn w-full text-white py-4 px-6 rounded-lg flex items-center justify-center font-bold text-lg">
-                            <i class="fab fa-whatsapp text-2xl mr-3"></i> BELI VIA WHATSAPP
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-8 space-y-4">
+                    <h2 class="text-xl font-semibold">Beli Sekarang!</h2>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://wa.me/6281803185594?text=Saya%20tertarik%20dengan%20produk%20{{ urlencode($product->nama) }}%20(%20Rp%20{{ number_format($product->harga, 0, ',', '.') }})%20di%20UMKM%20Agus%20Jaya"
+                            target="_blank"
+                            class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center transition">
+                            <i class="fab fa-whatsapp mr-2"></i> BELI VIA WHATSAPP
+                        </a>
+
+                        <a href="/maps" target="_blank"
+                            class="border border-green-600 text-green-600 hover:bg-green-50 px-6 py-3 rounded-lg font-medium inline-flex items-center transition">
+                            <i class="fas fa-map-marker-alt mr-2"></i> DATANG KE TOKO
                         </a>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Tombol Kembali -->
-        <div class="mt-8 text-center">
-            <a href="{{ route('katalog') }}" 
-               class="back-btn inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
-                <i class="fas fa-arrow-left mr-2"></i> Kembali ke Katalog
-            </a>
-        </div>
-    </div>
+                <!-- Fitur -->
+                <div class="mt-8 border-t border-gray-200 pt-4 space-y-2 text-sm text-gray-600">
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt mr-2 text-blue-500"></i>
+                        Garansi 1 tahun resmi
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-truck mr-2 text-blue-500"></i>
+                        Gratis ongkir seluruh Indonesia
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deskripsi -->
+        <section class="bg-white rounded-3xl shadow p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">Deskripsi Produk</h2>
+            <p class="text-gray-700 leading-relaxed">
+                {{ $product->deskripsi ?? 'Deskripsi produk belum tersedia.' }}
+            </p>
+        </section>
+
+        <!-- Produk Terkait -->
+        <section>
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">Produk Terkait</h2>
+            <div class="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                @forelse ($relatedProducts as $item)
+                    <div
+                        class="bg-white rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 overflow-hidden group">
+                        <a href="{{ route('productDetail', $item->id) }}">
+                            <div
+                                class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+                                @if ($item->thumbnail)
+                                    <img src="{{ asset('uploads/products/' . $item->thumbnail->image) }}"
+                                        alt="{{ $item->nama }}"
+                                        class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                                        onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                        <i class="fas fa-helmet-safety text-5xl opacity-30"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="p-4">
+                                <h3
+                                    class="font-semibold text-gray-800 text-lg mb-1 truncate group-hover:text-blue-700 transition">
+                                    {{ $item->nama }}
+                                </h3>
+                                <p class="text-blue-600 font-semibold text-sm">
+                                    Rp{{ number_format($item->harga, 0, ',', '.') }}
+                                </p>
+                                <p class="text-xs text-gray-500 mt-1">Stok: {{ $item->stok }}</p>
+                                <a href="{{ route('productDetail', $item->id) }}"
+                                    class="mt-3 inline-block text-center w-full bg-blue-600 text-white py-2 rounded-lg text-sm hover:bg-blue-700 transition">
+                                    Lihat Detail
+                                </a>
+                            </div>
+                        </a>
+                    </div>
+                @empty
+                    <div class="col-span-full text-center text-gray-500">
+                        Produk terkait tidak ditemukan.
+                    </div>
+                @endforelse
+            </div>
+        </section>
+    </main>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = this.querySelector('i');
+
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+    </script>
 </body>
+
 </html>
