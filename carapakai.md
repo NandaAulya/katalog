@@ -9,7 +9,6 @@
 6. composer require alexpechkarev/google-maps
 
 7. Tambahkan API key pada file .env
-GOOGLE_MAPS_API_KEY=AIzaSyAAU78BLbTw6TC62KNSzix8YgJrg38kalY
 
 8. lalu tambahkan di config/services.php
 'google_maps' => [
