@@ -15,4 +15,6 @@
     'key' => env('GOOGLE_MAPS_API_KEY'),
 ],
 
-9. siap pakai
+9. php artisan storage:link
+
+10. siap pakai

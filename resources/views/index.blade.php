@@ -118,7 +118,7 @@
                             class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                             <div class="relative">
                                 @if ($product->thumbnail)
-                                    <img src="{{ asset('uploads/products/' . $product->thumbnail->image) }}"
+                                    <img src="{{ asset('storage/' . $product->thumbnail->image) }}"
                                         alt="{{ $product->nama }}" class="w-full h-full object-contain p-4"
                                         onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
                                 @else

@@ -15,7 +15,7 @@ class HomeController extends Controller
             ->orderByRaw("CASE WHEN categories.nama = 'Helm' THEN 0 ELSE 1 END")
             ->orderBy('products.created_at', 'desc')
             ->select('products.*') // penting untuk menghindari konflik field dari join
-            ->paginate(12);
+            ->paginate(20);
 
         $categories = Category::all();
 

@@ -30,7 +30,7 @@ class AdminController extends Controller
     }
     public function productIndex()
     {
-        $products = Product::with('category')->orderBy('created_at', 'desc')->paginate(5);
+        $products = Product::with('category')->orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::all();
         return view('admin.listProduct', compact('products', 'categories'));
     }
@@ -101,11 +101,13 @@ class AdminController extends Controller
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $gambar) {
                 $imageName = time() . '-' . uniqid() . '.' . $gambar->getClientOriginalExtension();
-                $gambar->move(public_path('uploads/products'), $imageName);
+                // $gambar->move(public_path('uploads/products'), $imageName);
+                $path = $gambar->storeAs('products', $imageName, 'public');
 
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => $imageName,
+                    // 'image' => $imageName,
+                    'image' => $path, // contoh: "products/namafile.jpg"
                 ]);
             }
         }
@@ -144,12 +146,14 @@ class AdminController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $img) {
                 $imageName = time() . '_' . uniqid() . '.' . $img->getClientOriginalExtension();
-                $img->move(public_path('uploads/products'), $imageName);
+                // $img->move(public_path('uploads/products'), $imageName);
+                $path = $img->storeAs('products', $imageName, 'public');
 
                 // Simpan ke tabel product_images
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image' => $imageName,
+                    // 'image' => $imageName,
+                    'image' => $path,
                 ]);
             }
         }
@@ -184,7 +188,8 @@ class AdminController extends Controller
     {
         $image = ProductImage::findOrFail($id);
 
-        $imagePath = public_path('uploads/products/' . $image->image);
+        // $imagePath = public_path('uploads/products/' . $image->image);
+        $imagePath = storage_path('app/public/' . $image->image);
 
         // Cek apakah file benar-benar ada sebelum dihapus
         if (File::exists($imagePath)) {
@@ -203,7 +208,9 @@ class AdminController extends Controller
 
         // Hapus thumbnail jika ada
         if ($product->thumbnail && $product->thumbnail->image) {
-            $thumbnailPath = public_path('uploads/products/' . $product->thumbnail->image);
+            // $thumbnailPath = public_path('uploads/products/' . $product->thumbnail->image);
+            $thumbnailPath = storage_path('app/public/' . $product->thumbnail->image);
+
             if (File::exists($thumbnailPath)) {
                 File::delete($thumbnailPath);
             }
@@ -214,7 +221,9 @@ class AdminController extends Controller
 
         // Hapus semua gambar tambahan
         foreach ($product->images as $image) {
-            $imagePath = public_path('uploads/products/' . $image->image);
+            // $imagePath = public_path('uploads/products/' . $image->image);
+            $imagePath = storage_path('app/public/' . $image->image);
+
             if (File::exists($imagePath)) {
                 File::delete($imagePath);
             }

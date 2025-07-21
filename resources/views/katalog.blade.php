@@ -157,7 +157,7 @@
                             class="group relative bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-md block">
                             <div class="relative w-full h-56 bg-gray-50 rounded-xl overflow-hidden">
                                 @if ($product->thumbnail)
-                                    <img src="{{ asset('uploads/products/' . $product->thumbnail->image) }}"
+                                    <img src="{{ asset('storage/' . $product->thumbnail->image) }}"
                                         alt="{{ $product->nama }}" class="w-full h-full object-contain p-4"
                                         onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
                                 @else

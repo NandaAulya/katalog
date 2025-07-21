@@ -190,7 +190,7 @@
                                         {{ $product->id }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($product->thumbnail)
-                                            <img src="{{ asset('uploads/products/' . $product->thumbnail->image) }}"
+                                            <img src="{{ asset('storage/' . $product->thumbnail->image) }}"
                                                 alt="{{ $product->nama }}" class="product-image"
                                                 onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
                                         @else

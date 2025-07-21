@@ -37,7 +37,7 @@
                     <div class="swiper-wrapper content-center">
                         @forelse ($product->images as $image)
                             <div class="swiper-slide flex justify-center items-center">
-                                <img src="{{ asset('uploads/products/' . $image->image) }}" alt="{{ $product->nama }}"
+                                <img src="{{ asset('storage/' . $image->image) }}" alt="{{ $product->nama }}"
                                     class="w-full max-w-xs md:max-w-md max-h-80 object-contain mx-auto" />
 
                             </div>
@@ -134,7 +134,7 @@
                             <div
                                 class="relative w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
                                 @if ($item->thumbnail)
-                                    <img src="{{ asset('uploads/products/' . $item->thumbnail->image) }}"
+                                    <img src="{{ asset('storage/' . $item->thumbnail->image) }}"
                                         alt="{{ $item->nama }}"
                                         class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300 ease-in-out"
                                         onerror="this.onerror=null;this.src='{{ asset('images/placeholder.png') }}';">
