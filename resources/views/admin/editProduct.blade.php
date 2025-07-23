@@ -257,7 +257,7 @@
                             <div class="mb-4">
                                 <p class="text-sm text-gray-500 mb-2">Current Thumbnail:</p>
                                 <img class="current-image"
-                                    src="{{ asset('uploads/products/' . $product->thumbnail->image) }}"
+                                    src="{{ asset('storage/' . $product->thumbnail->image) }}"
                                     alt="Current product image">
                             </div>
                         @endif
@@ -300,7 +300,7 @@
                     @foreach ($product->images as $img)
                         <div class="relative group shadow-md rounded-md overflow-hidden">
                             <div class="w-full aspect-square bg-gray-100">
-                                <img src="{{ asset('uploads/products/' . $img->image) }}" alt="Gambar Produk"
+                                <img src="{{ asset('storage/' . $img->image) }}" alt="Gambar Produk"
                                     class="w-full h-full object-cover">
                             </div>
 

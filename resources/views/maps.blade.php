@@ -51,10 +51,9 @@
                 Lihat Lokasi
             </a></li>
                 <li><strong>Alamat:</strong> Jl. Raya Manyar No.68, Menur Pumpungan, Kec. Sukolilo, Surabaya, Jawa Timur 60118</li>
-                <li><strong>Fasilitas:</strong> Lokasi ini dilengkapi dengan area parkir luas, Wi-Fi gratis, dan akses yang mudah dijangkau.</li>
-                <li><strong>Jam Buka:</strong> Senin - Jum'at, pukul 10:00 - 22:00 WIB</li>
-                <li><strong></strong> Jumat, pukul 14:00 - 22:00 WIB</li>
-                <li><strong></strong> Sabtu - Minggu, pukul 10:00 - 22:00 WIB</li>
+                <li><strong>Fasilitas:</strong> Lokasi ini dilengkapi dengan area parkir yang memadai, tersedia minuman dan akses yang mudah dijangkau.</li>
+                <li><strong>Jam Buka:</strong> Buka Setiap Hari, pukul 07:30 - 21:00 WIB</li>
+                <li><strong></strong> Jum'at Libur</li>
             </ul>
         </div>
     </main>

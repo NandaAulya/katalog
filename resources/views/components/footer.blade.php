@@ -7,9 +7,9 @@
                         <i class="fas fa-helmet-safety text-2xl text-blue-400 mr-2"></i>
                         <h3 class="font-bold text-xl">Toko Agus Jaya</h3>
                     </div>
-                    <p class="text-gray-400 mb-4">Penyedia helm berkualitas dengan standar keamanan tinggi sejak 2010,
+                    <p class="text-gray-400 mb-4">Penyedia helm berkualitas dengan standar keamanan tinggi sejak 1985,
                         berkomitmen untuk keselamatan pengendara.</p>
-                    <div class="flex space-x-4">
+                    {{-- <div class="flex space-x-4">
                         <a href="#" class="social-icon text-gray-400 hover:text-blue-400 text-xl">
                             <i class="fab fa-facebook-f"></i>
                         </a>
@@ -22,7 +22,7 @@
                         <a href="#" class="social-icon text-gray-400 hover:text-red-500 text-xl">
                             <i class="fab fa-youtube"></i>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Jam Operasional -->
@@ -35,23 +35,16 @@
                         <li class="flex justify-between items-center">
                             <span class="flex items-center gap-2">
                                 <i class="far fa-sun text-xs"></i>
-                                <span>Senin-Jumat</span>
+                                <span>Buka Setiap Hari</span>
                             </span>
-                            <span class="bg-gray-800 px-2 py-1 rounded text-xs">09:00 - 20:00</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded text-xs">07:30 - 21:00</span>
                         </li>
                         <li class="flex justify-between items-center">
                             <span class="flex items-center gap-2">
                                 <i class="far fa-sun text-xs"></i>
-                                <span>Sabtu</span>
+                                <span>Jum'at</span>
                             </span>
-                            <span class="bg-gray-800 px-2 py-1 rounded text-xs">10:00 - 18:00</span>
-                        </li>
-                        <li class="flex justify-between items-center">
-                            <span class="flex items-center gap-2">
-                                <i class="far fa-sun text-xs"></i>
-                                <span>Minggu</span>
-                            </span>
-                            <span class="bg-gray-800 px-2 py-1 rounded text-xs">10:00 - 15:00</span>
+                            <span class="bg-gray-800 px-2 py-1 rounded text-xs">Libur</span>
                         </li>
                         <li class="pt-2 text-xs italic text-gray-500">
                             *Hari libur jam operasional mungkin berubah
@@ -106,18 +99,18 @@
                                 <div class="font-medium">Agus</div>
                                 <div><a href="https://wa.me/6281803185594" target="_blank"
                                         class="text-blue-400 hover:underline">0818-0318-5594</a></div>
-                                <div class="font-medium">Galino</div>
+                                <div class="font-medium">Cak No</div>
                                 <div><a href="https://wa.me/628155599007341" target="_blank"
                                         class="text-blue-400 hover:underline">0815-5990-07341</a></div>
                             </div>
                         </li>
-                        <li class="flex items-start">
+                        {{-- <li class="flex items-start">
                             <i class="fas fa-envelope text-blue-400 mt-1 mr-3 text-sm"></i>
                             <div>
                                 <div class="font-medium">Email</div>
                                 <div>cs@umkmhelm.com</div>
                             </div>
-                        </li>
+                        </li> --}}
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3 text-sm"></i>
                             <div>

@@ -28,6 +28,12 @@
     <x-navbar />
 
     <main class="container mx-auto px-4 py-10 space-y-12">
+        
+        <div class="flex items-center space-x-4 mb-4">
+            <a href="{{ route('katalog') }}" class="text-white bg-gray-500 hover:bg-gray-700 rounded-lg px-4 py-2">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+        </div>
 
         <!-- Detail Produk -->
         <section class="bg-white rounded-3xl shadow-xl p-6 md:p-10 md:flex gap-8">
@@ -86,7 +92,7 @@
 
                 <!-- CTA -->
                 <div class="mt-8 space-y-4">
-                    <h2 class="text-xl font-semibold">Beli Sekarang!</h2>
+                    <h2 class="text-xl font-bold">Beli Sekarang!</h2>
                     <div class="flex flex-wrap gap-4">
                         <a href="https://wa.me/6281803185594?text=Saya%20tertarik%20dengan%20produk%20{{ urlencode($product->nama) }}%20(%20Rp%20{{ number_format($product->harga, 0, ',', '.') }})%20di%20UMKM%20Agus%20Jaya"
                             target="_blank"
@@ -105,11 +111,7 @@
                 <div class="mt-8 border-t border-gray-200 pt-4 space-y-2 text-sm text-gray-600">
                     <div class="flex items-center">
                         <i class="fas fa-shield-alt mr-2 text-blue-500"></i>
-                        Garansi 1 tahun resmi
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-truck mr-2 text-blue-500"></i>
-                        Gratis ongkir seluruh Indonesia
+                        Bergaransi Pemeliharaan Dari Penjual Langsung
                     </div>
                 </div>
             </div>

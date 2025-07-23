@@ -52,12 +52,12 @@
             <div class="promo-slider">
                 <!-- Slide 1 -->
                 <div class="promo-slide relative">
-                    <img src="images/image1.jpg" alt="Promo Helm 1">
+                    <img src="images/toko1.jpg" alt="Promo Helm 1">
                     <div
                         class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 rounded-b-lg">
                         <div class="max-w-md">
-                            <h3 class="text-white text-2xl font-bold mb-2">DISKON 30% HARI INI!</h3>
-                            <p class="text-gray-200 mb-4">Khusus pembelian helm seri terbaru dengan kupon HELM2023</p>
+                            <h3 class="text-white text-2xl font-bold mb-2">DISKON SETIAP BERLANGGANAN!</h3>
+                            <p class="text-gray-200 mb-4">Khusus pembeli berlangganan, dapatkan diskon khusus</p>
                             <a href="katalog"
                                 class="bg-yellow-400 hover:bg-yellow-300 text-blue-800 font-bold py-2 px-6 rounded-lg inline-block">BELI
                                 SEKARANG</a>
@@ -67,13 +67,12 @@
 
                 <!-- Slide 2 -->
                 <div class="promo-slide relative">
-                    <img src="images/image2.jpg" alt="Promo Helm 2">
+                    <img src="images/toko2.jpg" alt="Promo Helm 2">
                     <div
                         class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 rounded-b-lg">
                         <div class="max-w-md">
                             <h3 class="text-white text-2xl font-bold mb-2">GRATIS AKSESORI!</h3>
-                            <p class="text-gray-200 mb-4">Dapatkan masker dan sarung tangan gratis untuk pembelian di
-                                atas Rp 1.500.000</p>
+                            <p class="text-gray-200 mb-4">Dapatkan gratis aksesoris dengan pembelian helm</p>
                             <a href="katalog"
                                 class="bg-yellow-400 hover:bg-yellow-300 text-blue-800 font-bold py-2 px-6 rounded-lg inline-block">LIHAT
                                 PRODUK</a>
@@ -83,7 +82,7 @@
 
                 <!-- Slide 3 -->
                 <div class="promo-slide relative">
-                    <img src="images/image3.jpeg" alt="Promo Helm 3">
+                    <img src="images/toko3.jpg" alt="Promo Helm 3">
                     <div
                         class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 rounded-b-lg">
                         <div class="max-w-md">
@@ -175,12 +174,12 @@
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-3xl font-extrabold text-center text-blue-700 mb-12">Tentang Toko Agus Jaya Helm</h2>
                 <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <img src="{{ asset('images/image3.jpeg') }}" alt="Foto Toko" class="rounded-xl shadow-lg">
+                    <img src="{{ asset('images/toko3.jpg') }}" alt="Foto Toko" class="rounded-xl shadow-lg">
 
                     <div class="relative text-gray-700 bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-600">
-                        <p><strong class="text-blue-600">Toko Agus Jaya Helm</strong> berdiri sejak 2010 dan telah
-                            melayani ribuan
-                            pelanggan di seluruh Indonesia. Kami percaya bahwa keselamatan berkendara dimulai dari helm
+                        <p><strong class="text-blue-600">Toko Agus Jaya Helm</strong> berdiri sejak 1985 dan telah
+                            melayani jutaan
+                            pelanggan di Indonesia. Kami percaya bahwa keselamatan berkendara dimulai dari helm
                             yang
                             berkualitas.</p>
                         <p class="mt-4">Semua produk kami telah lulus standar keamanan seperti <strong>SNI</strong>,
@@ -214,8 +213,8 @@
                         </p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h4 class="text-lg font-semibold text-blue-600 mb-2">Pengiriman Cepat</h4>
-                        <p class="text-gray-600 text-sm">Kami kirim produk ke seluruh Indonesia dalam 2–5 hari kerja.
+                        <h4 class="text-lg font-semibold text-blue-600 mb-2">Konsultasi Gratis</h4>
+                        <p class="text-gray-600 text-sm">Kami menyediakan konsultasi gratis untuk membantu Anda.
                         </p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md">
